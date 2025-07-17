@@ -1,0 +1,50 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "**Personal Portfolio**",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "concurrently \"bun run dev:tailwind\"  \"bun --watch run src/index.tsx\"",
+    "dev:tailwind": "tailwindcss -i ./src/global.css -o ./dist/out.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-am-henri/portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/i-am-henri/portfolio/issues"
+  },
+  "homepage": "https://github.com/i-am-henri/portfolio#readme",
+  "devDependencies": {
+    "@biomejs/biome": "2.1.1",
+    "@types/bun": "^1.2.18",
+    "concurrently": "^9.2.0",
+    "lint-staged": "^16.1.2",
+    "typescript": "^5.3.3",
+    "ultracite": "5.0.36"
+  },
+  "dependencies": {
+    "@mdx-js/esbuild": "^3.1.0",
+    "@tailwindcss/cli": "^4.1.11",
+    "@types/markdown-it": "^14.1.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^14.1.0",
+    "markdown-it-front-matter": "^0.2.4",
+    "marked": "^16.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.11",
+    "zod": "^4.0.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
+      "npx ultracite format"
+    ]
+  }
+}
