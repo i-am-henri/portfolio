@@ -1,14 +1,27 @@
 import RootLayout from '../layouts/root';
-import type { BlogFile } from '../lib/load';
 
-export default function Blog({ article }: { article: BlogFile }) {
+export default function BlogList({
+  list,
+}: {
+  list: { title: string; date: string; slug: string }[];
+}) {
   return (
     <RootLayout>
-      <div
-        className="flex flex-col space-y-3"
-        /* biome-ignore lint/security/noDangerouslySetInnerHtml: we need to render the Markdown as html */
-        dangerouslySetInnerHTML={{ __html: article.html }}
-      />
+      <a className="mb-4 font-semibold text-md underline" href="/">
+        Henri
+      </a>
+      {list.map((item, index) => (
+        <a
+          className="group mb-4 flex w-full cursor-pointer flex-row items-center justify-between no-underline"
+          href={`/blog/${item.slug}`}
+          key={index.toString()}
+        >
+          <h2 className="font-medium text-black text-lg no-underline transition-colors group-hover:text-neutral-700">
+            {item.title}
+          </h2>
+          <p className="text-neutral-700 text-sm no-underline">{item.date}</p>
+        </a>
+      ))}
     </RootLayout>
   );
 }

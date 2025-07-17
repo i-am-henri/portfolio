@@ -2,7 +2,8 @@ import { serve } from 'bun';
 import { renderToReadableStream } from 'react-dom/server';
 import { loadBlog } from './lib/load';
 import Home from './routes';
-import Blog from './routes/blog';
+import BlogList from './routes/blog';
+import Blog from './routes/blog-page';
 
 const server = serve({
   port: 3000,
@@ -23,6 +24,28 @@ const server = serve({
           'Content-Type': 'text/css',
         },
       }),
+
+    '/blog': async () => {
+      const blog = await loadBlog();
+
+      // tranforming the map of the blog entries into an array
+      const blogArray = Array.from(blog.values()).map(
+        ({ title, date }, index) => ({
+          slug: Array.from(blog.keys())[index],
+          title,
+          date,
+        })
+      );
+      const stream = await renderToReadableStream(
+        <BlogList list={blogArray} />
+      );
+      return new Response(stream, {
+        headers: {
+          'Content-Type': 'text/html',
+        },
+      });
+    },
+
     // We are getting the "slug" of the blog, that's also the filename of the corresponding markdown file in
     // `src/posts`. After that, we'll render the content with React.a
     '/blog/*': async (req) => {
