@@ -1,11 +1,31 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
 * {
   font-family: "Inter", sans-serif;
-  color: #222;
+  font-style: normal;
+  color: #333;
   font-size: 14px;
 }
 
 h1 {
   color: #111;
+}
+
+.code {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+
+  @apply ring-2 bg-[#FAFAFA] ring-neutral-100 p-2 rounded-md text-sm;
+}
+
+code {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+
+  @apply bg-[#FAFAFA]  p-0.5 rounded-sm text-sm;
 }

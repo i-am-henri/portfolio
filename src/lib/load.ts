@@ -1,7 +1,7 @@
 import { Glob } from 'bun';
 import matter from 'gray-matter';
-import { marked } from 'marked';
 import { z } from 'zod/v4';
+import { renderMarkdownWithSyntaxHighlighting } from './markdown';
 
 export const blogFileSchema = z.object({
   title: z.string(),
@@ -27,7 +27,7 @@ export async function loadBlog() {
 
     const parsed = matter(content);
 
-    const html = await marked(parsed.content);
+    const html = await renderMarkdownWithSyntaxHighlighting(parsed.content);
 
     const frontmatterParse = blogFileSchema.safeParse({
       title: parsed.data.title,
