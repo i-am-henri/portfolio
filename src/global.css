@@ -26,6 +26,7 @@ code {
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
+  overflow-x: auto;
 
   @apply bg-[#FAFAFA]  p-0.5 rounded-sm text-sm;
 }

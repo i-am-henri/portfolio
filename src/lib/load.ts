@@ -1,7 +1,7 @@
 import { Glob } from 'bun';
 import matter from 'gray-matter';
 import { z } from 'zod/v4';
-import { renderMarkdownWithSyntaxHighlighting } from './markdown';
+import { renderMDX } from './mdx';
 
 export const blogFileSchema = z.object({
   title: z.string(),
@@ -10,15 +10,18 @@ export const blogFileSchema = z.object({
 });
 
 export type BlogFile = z.infer<typeof blogFileSchema> & {
-  html: string;
+  Component: React.ComponentType;
   slug: string;
 };
 
 export async function loadBlog() {
-  const glob = new Glob('*.md');
+  const glob = new Glob('*.{md,mdx}');
   const scannedFiles = await Array.fromAsync(glob.scan({ cwd: './src/posts' }));
 
-  const files = new Map<string, Omit<BlogFile, 'slug'> & { html: string }>();
+  const files = new Map<
+    string,
+    Omit<BlogFile, 'slug'> & { Component: React.ComponentType }
+  >();
 
   for await (const file of scannedFiles) {
     const content = await globalThis.Bun.file(
@@ -27,12 +30,12 @@ export async function loadBlog() {
 
     const parsed = matter(content);
 
-    const html = await renderMarkdownWithSyntaxHighlighting(parsed.content);
+    const { Component } = await renderMDX(parsed.content, parsed.data);
 
     const frontmatterParse = blogFileSchema.safeParse({
       title: parsed.data.title,
       date: parsed.data.date,
-      content: html,
+      content: parsed.content,
     });
 
     if (!frontmatterParse.success) {
@@ -45,7 +48,7 @@ export async function loadBlog() {
 
     files.set(file.split('.')[0], {
       ...frontmatterParse.data,
-      html,
+      Component,
     });
   }
 

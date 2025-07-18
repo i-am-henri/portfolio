@@ -1,5 +1,7 @@
+import { MDXProvider } from '@mdx-js/react';
 import RootLayout from '../layouts/root';
 import type { BlogFile } from '../lib/load';
+import { mdxComponents } from '../lib/mdx';
 
 export default function Blog({ article }: { article: BlogFile }) {
   return (
@@ -23,11 +25,11 @@ export default function Blog({ article }: { article: BlogFile }) {
         <h1 className="mb-4 font-bold text-3xl">{article.title}</h1>
         <p className="mb-4 text-neutral-700 text-sm">{article.date}</p>
       </div>
-      <div
-        className="flex flex-col space-y-3"
-        /* biome-ignore lint/security/noDangerouslySetInnerHtml: we need to render the Markdown as html */
-        dangerouslySetInnerHTML={{ __html: article.html }}
-      />
+      <div className="flex flex-col space-y-3">
+        <MDXProvider components={mdxComponents}>
+          <article.Component />
+        </MDXProvider>
+      </div>
     </RootLayout>
   );
 }
