@@ -113,7 +113,6 @@ export async function findMDXFiles() {
   const postsDir = resolve(process.cwd(), 'src/posts');
 
   const dirFiles = await readdir(postsDir);
-  console.log(dirFiles);
   const files: (z.infer<typeof frontmatterSchema> & { slug: string })[] = [];
 
   for await (const file of dirFiles) {
