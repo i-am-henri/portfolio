@@ -36,7 +36,6 @@ const server = serve({
         date: new Date(entry.date).toLocaleDateString('en-US'),
         slug: entry.slug,
       }));
-      console.log('Blog entries:', blogArray);
       const stream = await renderToReadableStream(
         <BlogList list={blogArray} />
       );

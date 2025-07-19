@@ -7,7 +7,7 @@ export default function BlogList({
 }) {
   return (
     <RootLayout>
-      <a className="mb-4 font-semibold text-md underline" href="/">
+      <a className="mb-4 font-semibold text-md" href="/">
         Henri
       </a>
       {list.map((item, index) => (

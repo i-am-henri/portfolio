@@ -17,6 +17,8 @@ export default function Blog({
         <meta content={frontmatter.date.toISOString()} name="date" />
         <meta charSet="UTF-8" />
         <link href="/global.css" rel="stylesheet" />
+        <meta content="https://henri.is/avatar.ico" property="og:image" />
+        <meta content="avatar.ico" name="twitter:image" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <link href="avatar.ico" rel="icon" />
         <meta content="index, follow" name="robots" />
