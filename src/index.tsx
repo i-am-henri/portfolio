@@ -1,5 +1,6 @@
 import { serve } from 'bun';
 import { renderToReadableStream } from 'react-dom/server';
+import componentConfig from './components/md';
 import { MDXContent } from './lib/component';
 import { compileMDX, findMDXFiles } from './lib/mdx';
 import Home from './routes';
@@ -60,7 +61,7 @@ const server = serve({
 
       const stream = await renderToReadableStream(
         <Blog
-          blog={<MDXContent code={mdx.code} />}
+          blog={<MDXContent code={mdx.code} components={componentConfig} />}
           frontmatter={mdx.frontmatter}
         />
       );

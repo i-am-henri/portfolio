@@ -3,30 +3,81 @@
 
 * {
   font-family: "Inter", sans-serif;
-  font-style: normal;
-  color: #333;
+}
+
+* {
   font-size: 14px;
 }
 
-h1 {
-  color: #111;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 16px;
+  font-weight: 600;
 }
 
-.code {
-  font-family: "JetBrains Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
+h1 {
+  font-size: 24px;
+}
 
-  @apply ring-2 bg-[#FAFAFA] ring-neutral-100 p-2 rounded-md text-sm;
+h2 {
+  font-size: 22px;
 }
 
 code {
   font-family: "JetBrains Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-  overflow-x: auto;
+}
 
-  @apply bg-[#FAFAFA]  p-0.5 rounded-sm text-sm;
+ul,
+ol {
+  margin-left: 1.5rem;
+  padding-left: 0;
+  list-style-position: outside;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 14px;
+}
+
+th,
+td {
+  border: 1px solid #eeeeee;
+  padding: 0.5em 1em;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background-color: #f4f4f4;
+  font-weight: 600;
+}
+
+caption {
+  caption-side: bottom;
+  padding-top: 0.5em;
+  color: #6b7280;
+  font-size: 13px;
+  text-align: left;
+}
+
+.line > span {
+  font-family: "JetBrains Mono", monospace !important;
 }

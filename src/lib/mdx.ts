@@ -2,6 +2,7 @@ import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import matter from 'gray-matter';
 import { bundleMDX } from 'mdx-bundler';
+import remarkGfm from 'remark-gfm';
 import z from 'zod/v4';
 
 // Regex for matching import statements - defined at top level for performance
@@ -81,6 +82,10 @@ export async function compileMDX(slug: string) {
     const { code, frontmatter } = await bundleMDX({
       source: mdxFile,
       files: imports,
+      mdxOptions(options, _) {
+        options.remarkPlugins = [...(options.remarkPlugins || []), remarkGfm];
+        return options;
+      },
     });
 
     // parse frontmatter with zod
