@@ -72,3 +72,9 @@ caption {
 .line > span {
   font-family: "JetBrains Mono", monospace !important;
 }
+
+code {
+  background-color: #fafafa;
+  padding: 2px;
+  border-radius: 4px;
+}

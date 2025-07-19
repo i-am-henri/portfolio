@@ -3,7 +3,7 @@ import Link from './link';
 
 const componentConfig = {
   a: Link,
-  Code: CodeBlock,
+  CodeBlock,
 };
 
 export default componentConfig;

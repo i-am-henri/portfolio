@@ -36,9 +36,9 @@ export default function Blog({
           <article className="space-y-4">
             <h1 className="font-medium">{frontmatter.title}</h1>
             <p className="!text-neutral-500">{frontmatter.description}</p>
-            <div>{blog}</div>
+            <div className="flex flex-col space-y-3 ">{blog}</div>
           </article>
-          <footer>
+          <footer className="pb-12">
             <p>
               Written by {frontmatter.author} on{' '}
               {frontmatter.date.toLocaleDateString()}

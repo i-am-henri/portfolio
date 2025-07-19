@@ -56,3 +56,7 @@ export default async function CodeBlock({
     />
   );
 }
+
+export const code = ({ children }: { children: React.ReactNode }) => (
+  <code className="inline-code">{children}</code>
+);

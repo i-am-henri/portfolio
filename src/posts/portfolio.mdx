@@ -1,0 +1,78 @@
+---
+title: "Another Portfolio (and an introduction to bun)"
+description: "This posts answering the questions why I created a new portfolio, how I created the portfolio, and why it's not overengineered."
+date: 07-19-2025
+tags: ["portfolio"]
+author: Henri
+---
+
+*Why??*
+
+I made it again… a new portflio. It's probably my 5th or 6th portfolio, and I always ask myself why I do it again. I'm always unhappy with my portfolios, so I want to improve them. When I now also see a really inspiring and cool portfolio online (for this portfolio was the one my [Smintfy](www.smintfy.com)) and I have to create a new one. Usually also with a new tech stack to learn something new, this time a web-server with [bun](https://bun.com), [react](https://react.dev) and [mdx](https://mdxjs.com).
+
+To get started with a new bun project, either run `bun init <project_name>` or just create your project, with an typescript file. If you choose the second option, make sure to have the types from bun installed: `bun add @types/bun -D`. We can create a simple but fully functional webserver now in our index.ts file. 
+
+<CodeBlock lang="typescript">
+```typescript
+import { serve } from "bun";
+
+const server = serve({
+  routes: {
+    "/": () => new Response("Hello World!")
+  },
+  port: 3000
+})
+
+console.log("Server started at localhost:3000.")
+```
+</CodeBlock>
+
+This doesn't look really fancy, so we can proceed by adding react:
+
+<CodeBlock lang="bash">
+```bash
+bun add react react-dom
+```
+</CodeBlock>
+
+An the types for both of the packages:
+
+<CodeBlock lang="bash">
+```bash
+bun add @types/react @types/react-dom -D
+```
+</CodeBlock>
+
+We have to rename our `index.ts` file to `index.tsx` and we are good to go to write our react code! For that, we are editing the `/` (index) route:
+
+<CodeBlock lang="tsx">
+```tsx
+import { serve } from "bun";
+import { renderToReadableStream } from "react-dom/server"
+
+const server = serve({
+  routes: {
+    "/": async () => {
+      const stream = await renderToReadableStream(
+        <div>
+          Hello World!
+        </div>
+      );
+
+      return new Response(stream, {
+        headers: {
+          'Content-Type': 'text/html',
+        },
+      });
+    }
+  },
+  port: 3000
+})
+```
+</CodeBlock>
+
+We can now create our portfolio, with the bun apis and the react server rendering. Sadly, we need to manually hydrate the react pages to gain interactivity, but since my portfolio is only static, I don't need to hydrate them :D.
+
+For MDX, I've used [mdx-bunder](https://github.com/kentcdodds/mdx-bundler) to bundle the MDX files and render them after that. It's a little bit difficult to explain how I had set everything up, but I basically search through the files inside the `src/posts` folder in my project, bundle them, and return the frontmatter for a list. When I want to render a specific page, I search for the filename in the folder (with the text from the url), bundle everything and return a react page with the content.
+
+My entire portfolio is open-source and avaiable on [GitHub](https://github.com/i-am-henri/portfolio). You are allowed to take parts of it, please don't copy one-to-one.

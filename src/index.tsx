@@ -7,7 +7,7 @@ import Home from './routes';
 import BlogList from './routes/blog';
 import Blog from './routes/blog-page';
 
-const server = serve({
+serve({
   port: 3000,
   routes: {
     '/': async () => {
