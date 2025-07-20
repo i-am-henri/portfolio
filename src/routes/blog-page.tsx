@@ -20,7 +20,7 @@ export default function Blog({
         <meta content="https://henri.is/avatar.ico" property="og:image" />
         <meta content="avatar.ico" name="twitter:image" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <link href="avatar.ico" rel="icon" />
+        <link href="https://henri.is/avatar.ico" rel="icon" />
         <meta content="index, follow" name="robots" />
         {frontmatter.image && (
           <meta content={frontmatter.image} property="og:image" />
