@@ -1,11 +1,12 @@
 {
   "name": "portfolio",
-  "version": "1.0.0",
-  "description": "**Personal Portfolio**",
-  "main": "src/index.ts",
+  "version": "0.0.1",
+  "description": "Portfolio of henri.",
+  "main": "src/index.tsx",
   "scripts": {
     "dev": "concurrently \"bun run dev:tailwind\"  \"bun --watch run src/index.tsx\"",
-    "dev:tailwind": "tailwindcss -i ./src/global.css -o ./dist/out.css --watch"
+    "dev:tailwind": "tailwindcss -i ./src/global.css -o ./dist/out.css --watch",
+    "start": "bun build src/index.tsx --compile --outfile out/app && tailwindcss -i ./src/global.css -o ./dist/out.css && ./out/app"
   },
   "repository": {
     "type": "git",
