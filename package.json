@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "concurrently \"bun run dev:tailwind\"  \"bun --watch run src/index.tsx\"",
     "dev:tailwind": "tailwindcss -i ./src/global.css -o ./dist/out.css --watch",
-    "start": "bun build src/index.tsx --compile --outfile out/app && tailwindcss -i ./src/global.css -o ./dist/out.css && ./out/app"
+    "start": "bun build src/index.tsx --compile --outfile out/app && tailwindcss -i ./src/global.css -o ./dist/out.css && ./out/app",
+    "serve": "tailwindcss -i ./src/global.css -o ./dist/out.css && bun run src/index.tsx"
   },
   "repository": {
     "type": "git",
